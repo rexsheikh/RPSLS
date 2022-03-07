@@ -34,7 +34,6 @@ class Game():
 
     def choose_player_options(self):
         self.user_input = int(input("press 1 for PvP or 2 to play the AI: "))
-
         if self.user_input == 1:
             self.player1 = Human()
             self.player2 = Human()
@@ -49,10 +48,14 @@ class Game():
 
 
     def display_gesture_options(self):
-        pass
+        for in range(0,len(self.player1.gestures)):
+            
+
 
     def human_player_input(self):
-        #display gestures and receive an input 
+        print('please choose from one of the following gestures: ')
+        self.display_gesture_options()
+
         pass
 
     def ai_player_input(self):
