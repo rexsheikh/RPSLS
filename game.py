@@ -80,3 +80,53 @@ class Game():
         #prints the name of the winner
         #ask the user if they want to play again
         pass
+
+
+#steph
+    def play_game(self):
+        self.player1.choose_gesture()
+        self.player2.choose_gesture()
+        if self.player1.chosen_gesture == self.player2.chosen_gesture:
+            print("It's a tie! Please try again!")
+            self.display_winner()
+        elif (self.player1.chosen_gesture, self.player2.chosen_gesture) in self.winning_conditions:
+            print("Player one wins!")
+            self.player1.score += 1
+            self.display_winner()
+        else:
+            print("Player two wins!")
+            self.player2.score += 1
+            self.display_winner()
+        print()
+
+
+    def display_winner(self):
+        if self.player1.score == 2:
+            print("Player one is the winner!")
+        elif self.player2.score == 2:
+            print("Player two is the winner!")
+        else:
+            print()
+            print("Continue playing until one player reaches two wins!")
+            self.play_game()
+        print()
+    
+    def another_game(self):
+        while True:
+            replay_answer = input("Would you like to play again? (y/n) ")
+            if replay_answer == 'y':
+                self.clear_score()
+                self.run_game()
+                break
+            elif replay_answer == 'n':
+                print('Thanks for playing!')
+                break
+            else:
+                print('Please enter a valid answer!')
+                self.another_game()
+        print()
+
+    def clear_score(self):
+        self.player1.score = 0
+        self.player2.score = 0
+        self.run_game()
