@@ -7,33 +7,44 @@ class Game():
     def __init__(self):
         self.win_loss_table = [['draw','p1','p2','p2','p1'],['p2','draw','p1','p1','p2'],['p1','p2','draw','p2','p1'],['p1','p2','p1','draw','p2'],['p2','p1','p2','p1','draw']]
 
-
     def run_game(self):
         self.display_welcome()
         self.display_rules()
         game_type = self.choose_player_options()
-        self.player1_score = 0
-        self.player2_score = 0
         if game_type == 1:
-            self.player1_choice = self.display_gesture_options()
-            self.player2_choice = self.display_gesture_options()
-            self.winner = self.win_loss_table[self.player1_choice][self.player2_choice]
-            if self.winner == 'p1':
-                self.player1_score += 1
-                print(f'player 1 score: {self.player1_score}')
-                print(f'player 2 score: {self.player2_score}')
-            elif self.winner == 'p2':
-                self.player2_score += 1
-            else:
-                pass
-        else: 
-            #human v ai 
-            pass
-        #comparison of choices
-        #increment scoreboard
-        #check if winner exists (first to two)
-        #display winner 
-        pass
+            while(self.player1.score < 2 and self.player2.score < 2):
+                print(f'player 1 score: {self.player1.score}')
+                print(f'player 2 score: {self.player2.score}')
+                self.player1_choice = self.display_gesture_options()
+                self.player2_choice = self.display_gesture_options()
+                print(f"Player one chose {self.player1.gestures[self.player1_choice]} and Player 2 chose {self.player2.gestures[self.player2_choice]}")
+                self.winner = self.win_loss_table[self.player2_choice][self.player1_choice]
+                if self.winner == 'p1':
+                    self.player1.increment_score()
+                    print('Player 1 scores!')
+                elif self.winner == 'p2':
+                    self.player2.increment_score()
+                    print('Player 2 scores!')
+                else:
+                    pass
+        elif game_type == 2:
+            while(self.player1.score < 2 and self.player2.score < 2):
+                print(f'player 1 score: {self.player1.score}')
+                print(f'AI score: {self.player2.score}')
+                self.player1_choice = self.display_gesture_options()
+                self.player2_choice = self.ai_player_input()
+                print(f"Player one chose {self.player1.gestures[self.player1_choice]} and the AI chose {self.player2.gestures[self.player2_choice]}")
+                self.winner = self.win_loss_table[self.player2_choice][self.player1_choice]
+                if self.winner == 'p1':
+                    self.player1.increment_score()
+                    print('Player 1 scores!')
+                elif self.winner == 'p2':
+                    self.player2.increment_score()
+                    print('AI scores!')
+                elif self.winner =='draw':
+                    pass
+        self.display_winner()
+        self.another_game()
 
     def display_welcome(self):
         print("welcome to rock/paper/scissor/spock/lizard!")
@@ -74,7 +85,7 @@ class Game():
 
     def ai_player_input(self):
         self.ai_gesture = random.randint(0,4)
-        print(f'the AI has chosen {self.player2.gestures[self.ai_gesture]}')
+        return self.ai_gesture
 
     def display_winner(self):
         #prints the name of the winner
@@ -83,21 +94,21 @@ class Game():
 
 
 #steph
-    def play_game(self):
-        self.player1.choose_gesture()
-        self.player2.choose_gesture()
-        if self.player1.chosen_gesture == self.player2.chosen_gesture:
-            print("It's a tie! Please try again!")
-            self.display_winner()
-        elif (self.player1.chosen_gesture, self.player2.chosen_gesture) in self.winning_conditions:
-            print("Player one wins!")
-            self.player1.score += 1
-            self.display_winner()
-        else:
-            print("Player two wins!")
-            self.player2.score += 1
-            self.display_winner()
-        print()
+    # def play_game(self):
+    #     self.player1.choose_gesture()
+    #     self.player2.choose_gesture()
+    #     if self.player1.chosen_gesture == self.player2.chosen_gesture:
+    #         print("It's a tie! Please try again!")
+    #         self.display_winner()
+    #     elif (self.player1.chosen_gesture, self.player2.chosen_gesture) in self.winning_conditions:
+    #         print("Player one wins!")
+    #         self.player1.score += 1
+    #         self.display_winner()
+    #     else:
+    #         print("Player two wins!")
+    #         self.player2.score += 1
+    #         self.display_winner()
+    #     print()
 
 
     def display_winner(self):
