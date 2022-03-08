@@ -2,6 +2,7 @@ from player import Player
 from human import Human
 from ai import AI   
 import random
+import time
 
 class Game():
     def __init__(self):
@@ -9,7 +10,9 @@ class Game():
 
     def run_game(self):
         self.display_welcome()
+        time.sleep(1)
         self.display_rules()
+        time.sleep(1)
         game_type = self.choose_player_options()
         if game_type == 1:
             while(self.player1.score < 2 and self.player2.score < 2):
@@ -17,7 +20,7 @@ class Game():
                 print(f'player 2 score: {self.player2.score}')
                 self.player1_choice = self.display_gesture_options()
                 self.player2_choice = self.display_gesture_options()
-                print(f"Player one chose {self.player1.gestures[self.player1_choice]} and Player 2 chose {self.player2.gestures[self.player2_choice]}")
+                print(f"Player one chose {self.player1.gestures[self.player1_choice]} and Player 2 chose {self.player2.gestures[self.player2_choice]} \n")
                 self.winner = self.win_loss_table[self.player2_choice][self.player1_choice]
                 if self.winner == 'p1':
                     self.player1.increment_score()
@@ -26,14 +29,14 @@ class Game():
                     self.player2.increment_score()
                     print('Player 2 scores!')
                 else:
-                    pass
+                    print('draw!')
         elif game_type == 2:
             while(self.player1.score < 2 and self.player2.score < 2):
                 print(f'player 1 score: {self.player1.score}')
                 print(f'AI score: {self.player2.score}')
                 self.player1_choice = self.display_gesture_options()
                 self.player2_choice = self.ai_player_input()
-                print(f"Player one chose {self.player1.gestures[self.player1_choice]} and the AI chose {self.player2.gestures[self.player2_choice]}")
+                print(f"Player one chose {self.player1.gestures[self.player1_choice]} and the AI chose {self.player2.gestures[self.player2_choice]}\n")
                 self.winner = self.win_loss_table[self.player2_choice][self.player1_choice]
                 if self.winner == 'p1':
                     self.player1.increment_score()
@@ -41,8 +44,8 @@ class Game():
                 elif self.winner == 'p2':
                     self.player2.increment_score()
                     print('AI scores!')
-                elif self.winner =='draw':
-                    pass
+                else:
+                    print('draw!')
         self.display_winner()
         self.another_game()
 
@@ -51,7 +54,8 @@ class Game():
         pass
 
     def display_rules(self):
-        print("Rock crushes Scissors\n \
+        print("Here are the rules:\n \
+             Rock crushes Scissors\n \
              Scissors cuts Paper\n \
              Paper covers Rock\n \
              Rock crushes Lizard\n \
@@ -61,7 +65,6 @@ class Game():
              Lizard eats Paper\n \
              Paper disproves Spock\n \
              Spock vaporizes Rock")
-        pass
 
     def choose_player_options(self):
         self.user_input = int(input("press 1 for PvP or 2 to play the AI: "))
