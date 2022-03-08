@@ -15,23 +15,22 @@ class Game():
         time.sleep(1)
         self.display_rules()
         time.sleep(1)
-        game_type = self.choose_player_options()
-        if game_type == 1:
-            while(self.player1.score < 2 and self.player2.score < 2):
-                print(f'player 1 score: {self.player1.score}')
-                print(f'player 2 score: {self.player2.score}')
-                self.player1_choice = self.player1.choose_gesture()
-                self.player2_choice = self.player2.choose_gesture()
-                print(f"Player one chose {self.player1.gestures[self.player1_choice]} and Player two chose {self.player2.gestures[self.player2_choice]} \n")
-                self.winner = self.win_loss_table[self.player2_choice][self.player1_choice]
-                if self.winner == 'p1':
-                    self.player1.increment_score()
-                    print('Player 1 scores!')
-                elif self.winner == 'p2':
-                    self.player2.increment_score()
-                    print('Player 2 scores!')
-                else:
-                    print('draw!')
+        self.game_type = self.choose_player_options()
+        while(self.player1.score < 2 and self.player2.score < 2):
+            print(f'player 1 score: {self.player1.score}')
+            print(f'player 2 score: {self.player2.score}')
+            self.player1_choice = self.player1.choose_gesture()
+            self.player2_choice = self.player2.choose_gesture()
+            print(f"Player one chose {self.player1.gestures[self.player1_choice]} and Player two chose {self.player2.gestures[self.player2_choice]} \n")
+            self.winner = self.win_loss_table[self.player2_choice][self.player1_choice]
+            if self.winner == 'p1':
+                self.player1.increment_score()
+                print('Player 1 scores!')
+            elif self.winner == 'p2':
+                self.player2.increment_score()
+                print('Player 2 scores!')
+            else:
+                print('draw!')
         # elif game_type == 2:
         #     while(self.player1.score < 2 and self.player2.score < 2):
         #         print(f'player 1 score: {self.player1.score}')
