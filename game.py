@@ -15,39 +15,26 @@ class Game():
         time.sleep(1)
         self.display_rules()
         time.sleep(1)
-        self.game_type = self.choose_player_options()
+        self.choose_player_options()
         while(self.player1.score < 2 and self.player2.score < 2):
             print(f'player 1 score: {self.player1.score}')
             print(f'player 2 score: {self.player2.score}')
             self.player1_choice = self.player1.choose_gesture()
+            print('\n')
+            time.sleep(1)
             self.player2_choice = self.player2.choose_gesture()
+            print('\n')
+            time.sleep(1)
             print(f"Player one chose {self.player1.gestures[self.player1_choice]} and Player two chose {self.player2.gestures[self.player2_choice]} \n")
             self.winner = self.win_loss_table[self.player2_choice][self.player1_choice]
             if self.winner == 'p1':
                 self.player1.increment_score()
-                print('Player 1 scores!')
+                print('Player 1 scores!\n')
             elif self.winner == 'p2':
                 self.player2.increment_score()
-                print('Player 2 scores!')
+                print('Player 2 scores!\n')
             else:
                 print('draw!')
-        # elif game_type == 2:
-        #     while(self.player1.score < 2 and self.player2.score < 2):
-        #         print(f'player 1 score: {self.player1.score}')
-        #         time.sleep(1)
-        #         print(f'AI score: {self.player2.score}')
-        #         self.player1_choice = self.display_gesture_options()
-        #         self.player2_choice = self.ai_player_input()
-        #         print(f"Player one chose {self.player1.gestures[self.player1_choice]} and the AI chose {self.player2.gestures[self.player2_choice]}\n")
-        #         self.winner = self.win_loss_table[self.player2_choice][self.player1_choice]
-        #         if self.winner == 'p1':
-        #             self.player1.increment_score()
-        #             print('Player 1 scores!')
-        #         elif self.winner == 'p2':
-        #             self.player2.increment_score()
-        #             print('AI scores!')
-        #         else:
-        #             print('draw!')
         self.display_winner()
         self.another_game()
 
@@ -79,14 +66,7 @@ class Game():
         else:
             print('error. enter 1 or 2.')
             self.choose_player_options()
-        return self.user_input
         
-    def display_winner(self):
-        #prints the name of the winner
-        #ask the user if they want to play again
-        pass
-
-
 #steph
     # def play_game(self):
     #     self.player1.choose_gesture()
@@ -111,27 +91,21 @@ class Game():
         elif self.player2.score == 2:
             print("Player two is the winner!")
         else:
-            print()
             print("Continue playing until one player reaches two wins!")
             self.run_game()
         print()
     
     def another_game(self):
-        while True:
-            replay_answer = input("Would you like to play again? (y/n) ")
-            if replay_answer == 'y':
-                self.clear_score()
-                self.run_game()
-                break
-            elif replay_answer == 'n':
-                print('Thanks for playing!')
-                break
-            else:
-                print('Please enter a valid answer!')
-                self.another_game()
-        print()
+        self.answer = input("Would you like to play again? (y/n): ")
+        if self.answer == 'y':
+            self.clear_score()
+            self.run_game()
+        elif self.answer == 'n':
+            print('Thanks for playing!')
+        else:
+            print('Please enter a valid answer!')
 
     def clear_score(self):
         self.player1.score = 0
         self.player2.score = 0
-        self.run_game()
+
