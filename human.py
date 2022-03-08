@@ -9,7 +9,7 @@ class Human(Player):
         for i in range(0, len(self.gestures)):
             print(f"{i} : {self.gestures[i]}")
         self.gesture_choice = int(input(f'Choose the number corresponding to the gesture choice: '))
-        if self.gesture_choice not in list(range(0,4)):
+        if self.gesture_choice not in list(range(0,5)):
             print('Please enter a number between 0 and 4')
             self.choose_gesture()
         return self.gesture_choice
