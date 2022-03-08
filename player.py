@@ -5,5 +5,8 @@ class Player ():
 
     def increment_score(self):
         self.score += 1
+
+    def choose_gesture(self):
+        pass
     
     
